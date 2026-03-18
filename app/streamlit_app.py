@@ -1,3 +1,4 @@
+import re
 import streamlit as st
 from collections import Counter
 
@@ -18,25 +19,30 @@ default_feedback = [
 ]
 
 
-def classify_category(text: str) -> str:
-    text = text.lower()
+def tokenize(text: str) -> list[str]:
+    return re.findall(r"\b[a-zA-Z]+\b", text.lower())
 
-    if "refund" in text or "payment" in text or "money" in text:
+
+def classify_category(text: str) -> str:
+    words = set(tokenize(text))
+
+    if {"refund", "payment", "money", "billing"} & words:
         return "billing"
-    elif "delivery" in text or "package" in text or "late" in text:
+    elif {"delivery", "package", "late", "delay", "delayed"} & words:
         return "delivery"
-    elif "app" in text or "login" in text or "crash" in text or "issue" in text:
+    elif {"app", "login", "crash", "crashing", "error", "errors"} & words:
         return "app_issue"
-    elif "support" in text or "service" in text:
+    elif {"support", "service", "agent", "helpdesk"} & words:
         return "customer_support"
     else:
         return "other"
 
 
 def simple_sentiment(text: str) -> str:
-    text = text.lower()
+    text_lower = text.lower()
+    words = set(tokenize(text))
 
-    negative_words = [
+    negative_words = {
         "bad",
         "worst",
         "poor",
@@ -47,7 +53,9 @@ def simple_sentiment(text: str) -> str:
         "crash",
         "unhelpful",
         "issue",
+        "issues",
         "problem",
+        "problems",
         "refund",
         "unhappy",
         "angry",
@@ -61,9 +69,13 @@ def simple_sentiment(text: str) -> str:
         "failed",
         "failure",
         "error",
-    ]
+        "errors",
+        "awful",
+        "disappointed",
+        "upset",
+    }
 
-    positive_words = [
+    positive_words = {
         "amazing",
         "great",
         "smooth",
@@ -77,10 +89,14 @@ def simple_sentiment(text: str) -> str:
         "awesome",
         "nice",
         "easy",
-    ]
+    }
 
-    neg_count = sum(word in text for word in negative_words)
-    pos_count = sum(word in text for word in positive_words)
+    neg_count = len(words & negative_words)
+    pos_count = len(words & positive_words)
+
+    # Handle simple negation cases
+    if "not happy" in text_lower or "not good" in text_lower or "not satisfied" in text_lower:
+        neg_count += 1
 
     if neg_count > pos_count:
         return "negative"
