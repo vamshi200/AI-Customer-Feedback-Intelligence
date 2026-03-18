@@ -17,27 +17,66 @@ default_feedback = [
     "Everything worked perfectly and I am happy",
 ]
 
+
 def classify_category(text: str) -> str:
     text = text.lower()
+
     if "refund" in text or "payment" in text or "money" in text:
         return "billing"
-    if "delivery" in text or "package" in text or "late" in text:
+    elif "delivery" in text or "package" in text or "late" in text:
         return "delivery"
-    if "app" in text or "login" in text or "crash" in text:
+    elif "app" in text or "login" in text or "crash" in text or "issue" in text:
         return "app_issue"
-    if "support" in text or "service" in text:
+    elif "support" in text or "service" in text:
         return "customer_support"
-    return "other"
+    else:
+        return "other"
+
 
 def simple_sentiment(text: str) -> str:
     text = text.lower()
+
     negative_words = [
-        "bad", "worst", "poor", "late", "damaged", "rude",
-        "crashing", "crash", "unhelpful", "issue", "problem", "refund"
+        "bad",
+        "worst",
+        "poor",
+        "late",
+        "damaged",
+        "rude",
+        "crashing",
+        "crash",
+        "unhelpful",
+        "issue",
+        "problem",
+        "refund",
+        "unhappy",
+        "angry",
+        "terrible",
+        "slow",
+        "broken",
+        "frustrated",
+        "frustrating",
+        "delay",
+        "delayed",
+        "failed",
+        "failure",
+        "error",
     ]
+
     positive_words = [
-        "amazing", "great", "smooth", "happy", "excellent",
-        "perfectly", "good", "love"
+        "amazing",
+        "great",
+        "smooth",
+        "happy",
+        "excellent",
+        "perfectly",
+        "good",
+        "love",
+        "fast",
+        "satisfied",
+        "awesome",
+        "nice",
+        "easy",
     ]
 
     neg_count = sum(word in text for word in negative_words)
@@ -45,9 +84,11 @@ def simple_sentiment(text: str) -> str:
 
     if neg_count > pos_count:
         return "negative"
-    if pos_count > neg_count:
+    elif pos_count > neg_count:
         return "positive"
-    return "neutral"
+    else:
+        return "neutral"
+
 
 def generate_mock_insight(question: str, feedback_items: list[str]) -> str:
     categories = [classify_category(x) for x in feedback_items]
@@ -74,6 +115,7 @@ Suggested Actions:
 Note:
 This is a lightweight mock insight generator for deployment-safe demo purposes.
 """
+
 
 sentiments = [simple_sentiment(x) for x in default_feedback]
 categories = [classify_category(x) for x in default_feedback]
