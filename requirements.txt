@@ -1,0 +1,14 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+streamlit
+joblib
+sentence-transformers
+faiss-cpu
+langchain
+langchain-community
+langchain-openai
+langchain-text-splitters
+langchain-core
+openai

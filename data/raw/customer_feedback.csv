@@ -1,0 +1,21 @@
+text,sentiment
+"The app keeps crashing and I hate the latest update",negative
+"Customer support was very rude and unhelpful",negative
+"I received my order late and the packaging was damaged",negative
+"This is the worst service I have used",negative
+"The product quality is poor and not worth the money",negative
+"I love this app, very easy to use and smooth",positive
+"Excellent product and very fast delivery",positive
+"Customer service solved my issue quickly, great experience",positive
+"Very satisfied with the quality and performance",positive
+"Everything worked perfectly and I am happy",positive
+"The app is okay but needs some improvements",neutral
+"Delivery was on time but the box was slightly damaged",neutral
+"The experience was average, nothing special",neutral
+"It works fine for now",neutral
+"The service is acceptable but could be better",neutral
+"The refund process took too long and support did not respond",negative
+"Login was seamless and the interface looks great",positive
+"The update added useful features, nice work",positive
+"Payment failed multiple times and it was frustrating",negative
+"I have mixed feelings about the product",neutral
