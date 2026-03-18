@@ -6,7 +6,6 @@ matplotlib==3.8.4
 plotly==5.20.0
 joblib==1.4.2
 sentence-transformers==2.7.0
-faiss-cpu==1.8.0
 langchain==0.2.1
 langchain-community==0.2.1
 langchain-openai==0.1.8
