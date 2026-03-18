@@ -222,6 +222,25 @@ Through this project, I demonstrated:
 
 ☁️ Deployment on AWS / Docker
 
+## 🛠️ Challenges & Improvements  
+
+During development, a key issue was identified in the sentiment analysis logic.
+
+### Problem  
+The model incorrectly classified inputs like:  
+> "customer is unhappy"  
+
+as **positive**, due to substring matching (e.g., "happy" inside "unhappy").
+
+### Solution  
+- Implemented **tokenization using regex**  
+- Switched from substring matching → **whole-word matching**  
+- Improved sentiment accuracy by preventing false positives  
+
+### Result  
+- Correct classification of negative sentiments  
+- More reliable and realistic NLP behavior  
+
 👤 Author
 
 Raghuvamshi Kardhanoori
